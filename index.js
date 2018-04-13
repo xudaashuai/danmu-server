@@ -18,16 +18,18 @@ let i = 0;
 socketIO.on('connection', function (socket) {
   i += 1;
   let roomId = socket.handshake.query.id;
-  if (!roomId) {
-    socket.emit('error', {msg: '房间号不存在'})
-    return;
-  }
   socket.user = {id: i}
   socket.join(roomId, () => {
     console.log(roomId)
     socket.to(roomId).emit('join', {'msg': '徐大帅进入了房间'})
   })
+  socket.on('name', data => {
+    console.log(data)
+    socket.user.name=data
+    socket.emit('login',{})
+  })
   socket.on('message', data => {
+    console.log(data)
     socket.to(roomId).emit('message', {msg: data.msg, user: socket.user.id})
   })
 });
