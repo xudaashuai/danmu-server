@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      .app {
+        font-size: 48px;
+        background-color: #eeeeee;
+        height: 100%;
+      }
+
+      body, html {
+        height: 100%;
+        margin: 0;
+      }
+
+      .title-bar {
+        height: 50px;
+        background-color: #dddddd;
+      }
+
+      .content {
+
+      }
+
+      .send-box {
+        height: 50px;
+        background-color: #cccccc;
+        bottom: 0;
+        width: 100%;
+        position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="title-bar">123</div>
+      <div class="content">123</div>
+      <div class="send-box">123</div>
+    </div>
+    <script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.js"></script>
+    <script>
+      var socket = io('ws://localhost:3000?id=123');
+      socket.on('join', function (data) {
+        console.log(data);
+        //socket.emit('my other event', {my: 'data'});
+      });
+      socket.on('message', function (data) {
+        console.log(data);
+        //socket.emit('my other event', {my: 'data'});
+      });
+
+      function send(text) {
+        socket.emit('message', {msg: text})
+      }
+    </script>
+  </body>
+</html>
