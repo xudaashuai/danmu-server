@@ -23,7 +23,7 @@
     <script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.js"></script>
     <script type="text/javascript" src="dist/js/client.js"></script>
     <script>
-      var socket = io.connect('ws://localhost:3000?id=123');
+      var socket = io.connect('ws://118.24.24.60:3000?id=123');
       socket.on('join', function (data) {
         b(data.msg);
       });
